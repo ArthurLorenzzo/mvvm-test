@@ -2,6 +2,7 @@ package arlorenzzo.dev.br.mvvm_test.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.res.ResourcesCompat
 import arlorenzzo.dev.br.mvvm_test.R
@@ -22,13 +23,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
-        model.getCityData().observe(this, {city ->
-            binding.cityImage.setImageDrawable(
-                ResourcesCompat.getDrawable(resources, city.img, applicationContext.theme)
-            )
-            binding.nameTv.text = city.name
-            binding.populationTv.text = city.population.toString()
+        binding.btnComecar.setOnClickListener(View.OnClickListener {
+            model.getCityData().observe(this, { city ->
+                binding.cityImage.setImageDrawable(
+                    ResourcesCompat.getDrawable(resources, city.img, applicationContext.theme)
+                )
+                binding.nameTv.text = city.name
+                binding.populationTv.text = city.population.toString()
+            })
         })
+
+
     }
+
+
 }

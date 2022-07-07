@@ -16,13 +16,13 @@ class CityViewModel: ViewModel() {
     private val delay = 3000L
 
     init {
-        loop()
+        updateCity()
     }
 
     fun getCityData(): LiveData<City> = cityData
 
     private fun loop(){
-        android.os.Handler(Looper.getMainLooper()).postDelayed({updateCity()}, delay)
+       android.os.Handler(Looper.getMainLooper()).postDelayed({updateCity()}, delay)
     }
 
     private fun updateCity(){
@@ -31,6 +31,6 @@ class CityViewModel: ViewModel() {
 
         cityData.value = cities[currentIndex]
 
-        loop()
+       loop()
     }
 }
